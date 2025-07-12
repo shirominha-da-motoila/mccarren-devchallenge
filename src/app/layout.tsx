@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { AIProviderProvider } from "@/contexts/AIProviderContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,7 +51,9 @@ export default function RootLayout({
         
         {/* Main Content */}
         <div className="relative z-10">
-          {children}
+          <AIProviderProvider>
+            {children}
+          </AIProviderProvider>
         </div>
       </body>
     </html>

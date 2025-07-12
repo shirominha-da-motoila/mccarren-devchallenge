@@ -1,4 +1,4 @@
-import { generateProfileWithAI } from '@/utils/gemini-client';
+import { GeminiProvider } from '@/utils/gemini-provider';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
@@ -22,8 +22,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Create AI provider instance
+    const aiProvider = new GeminiProvider({
+      apiKey: process.env.GOOGLE_AI_API_KEY || '',
+      model: 'gemini-1.5-flash'
+    });
+
     // Generate profile with optional service lines
-    const profile = await generateProfileWithAI(websiteUrl, serviceLines);
+    const profile = await aiProvider.generateProfile(websiteUrl, serviceLines);
 
     return NextResponse.json(profile);
   } catch (error) {
