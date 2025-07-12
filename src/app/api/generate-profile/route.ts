@@ -1,0 +1,37 @@
+import { generateProfileWithAI } from '@/utils/gemini-client';
+import { NextRequest, NextResponse } from 'next/server';
+
+
+export async function POST(request: NextRequest) {
+  try {
+    const { websiteUrl, userData } = await request.json();
+
+    if (!websiteUrl) {
+      return NextResponse.json(
+        { error: 'Website URL is required' },
+        { status: 400 }
+      );
+    }
+
+    // Validate URL
+    try {
+      new URL(websiteUrl);
+    } catch {
+      return NextResponse.json(
+        { error: 'Invalid URL format' },
+        { status: 400 }
+      );
+    }
+
+    // Generate profile with optional user data
+    const profile = await generateProfileWithAI(websiteUrl, userData);
+
+    return NextResponse.json(profile);
+  } catch (error) {
+    console.error('Error in generate-profile API:', error);
+    return NextResponse.json(
+      { error: 'Failed to generate profile' },
+      { status: 500 }
+    );
+  }
+}
