@@ -1,10 +1,9 @@
 import { generateProfileWithAI } from '@/utils/gemini-client';
 import { NextRequest, NextResponse } from 'next/server';
 
-
 export async function POST(request: NextRequest) {
   try {
-    const { websiteUrl, userData } = await request.json();
+    const { websiteUrl, serviceLines } = await request.json();
 
     if (!websiteUrl) {
       return NextResponse.json(
@@ -23,8 +22,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate profile with optional user data
-    const profile = await generateProfileWithAI(websiteUrl, userData);
+    // Generate profile with optional service lines
+    const profile = await generateProfileWithAI(websiteUrl, serviceLines);
 
     return NextResponse.json(profile);
   } catch (error) {
