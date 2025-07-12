@@ -129,7 +129,7 @@ export default function UrlInput({ onSubmit, isLoading }: UrlInputProps) {
             <button
               type="submit"
               disabled={isLoading || !url.trim()}
-              className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-lg sm:text-xl border-2 border-blue-700 hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-lg sm:text-xl hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
               {isLoading ? '🤖 Generating Profile...' : '🚀 Generate Profile'}
             </button>
@@ -219,7 +219,7 @@ export default function UrlInput({ onSubmit, isLoading }: UrlInputProps) {
               <button
                 type="button"
                 onClick={addEmail}
-                className="text-purple-600 hover:text-purple-800 disabled:opacity-50 font-bold text-base sm:text-lg flex items-center"
+                className="text-blue-600 hover:text-blue-800 disabled:opacity-50 font-bold text-base sm:text-lg flex items-center"
                 disabled={isLoading}
               >
                 <span className="mr-2">+</span> Add Email
@@ -259,7 +259,7 @@ export default function UrlInput({ onSubmit, isLoading }: UrlInputProps) {
               <button
                 type="button"
                 onClick={addPoc}
-                className="text-yellow-600 hover:text-yellow-800 disabled:opacity-50 font-bold text-base sm:text-lg flex items-center"
+                className="text-blue-600 hover:text-blue-800 disabled:opacity-50 font-bold text-base sm:text-lg flex items-center"
                 disabled={isLoading}
               >
                 <span className="mr-2">+</span> Add Contact
