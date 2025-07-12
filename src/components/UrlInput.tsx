@@ -10,9 +10,9 @@ import PocField from './PocField';
 
 interface FormData {
   url: string;
-  emails: string[];
-  poc: string[];
-  serviceLines: ServiceLine[];
+  emails?: string[];
+  poc?: string[];
+  serviceLines?: ServiceLine[];
 }
 
 interface UrlInputProps {
@@ -23,9 +23,6 @@ interface UrlInputProps {
 export default function UrlInput({ onSubmit, isLoading }: UrlInputProps) {
   const [formData, setFormData] = useState<FormData>({
     url: '',
-    emails: [''],
-    poc: [''],
-    serviceLines: []
   });
   const [errors, setErrors] = useState<string[]>([]);
 
@@ -51,9 +48,9 @@ export default function UrlInput({ onSubmit, isLoading }: UrlInputProps) {
       // Filter out empty values
       const filteredData = {
         url: validUrl,
-        emails: formData.emails.filter(email => email.trim() !== ''),
-        poc: formData.poc.filter(contact => contact.trim() !== ''),
-        serviceLines: formData.serviceLines.filter(line => line.name.trim() !== '')
+        emails: formData.emails?.filter(email => email.trim() !== ''),
+        poc: formData.poc?.filter(contact => contact.trim() !== ''),
+        serviceLines: formData.serviceLines?.filter(line => line.name.trim() !== '')
       };
 
       onSubmit(filteredData);
@@ -93,21 +90,21 @@ export default function UrlInput({ onSubmit, isLoading }: UrlInputProps) {
         <div className='flex flex-col gap-6 sm:gap-8'>
           {/* Service Lines */}
           <ServiceLineField
-            serviceLines={formData.serviceLines}
+            serviceLines={formData.serviceLines || []}
             onServiceLinesChange={(value) => updateFormData('serviceLines', value)}
             disabled={isLoading}
           />
 
           {/* Emails */}
           <EmailField
-            emails={formData.emails}
+            emails={formData.emails || []}
             onEmailsChange={(value) => updateFormData('emails', value)}
             disabled={isLoading}
           />
 
           {/* Points of Contact */}
           <PocField
-            poc={formData.poc}
+            poc={formData.poc || []}
             onPocChange={(value) => updateFormData('poc', value)}
             disabled={isLoading}
           />

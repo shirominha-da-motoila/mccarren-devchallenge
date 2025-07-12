@@ -39,7 +39,7 @@ export default function CompanyProfileCard({ profile }: CompanyProfileCardProps)
             Service Lines
           </h3>
           <div className="grid grid-cols-1 gap-3 sm:gap-4">
-            {profile.service_lines.map((serviceLine, index) => (
+            {profile.service_lines && Array.isArray(profile.service_lines) && profile.service_lines.map((serviceLine, index) => (
               <div
                 key={index}
                 className="p-3 sm:p-4 bg-blue-50 border-blue-200 transform hover:brightness-95 transition-transform duration-200"
@@ -48,6 +48,11 @@ export default function CompanyProfileCard({ profile }: CompanyProfileCardProps)
                 <p className="text-gray-700 text-xs sm:text-sm">{serviceLine.description}</p>
               </div>
             ))}
+            {(!profile.service_lines || !Array.isArray(profile.service_lines) || profile.service_lines.length === 0) && (
+              <div className="p-3 sm:p-4 bg-gray-50 border-gray-200">
+                <p className="text-gray-500 text-xs sm:text-sm italic">No service lines available</p>
+              </div>
+            )}
           </div>
         </div>
 
@@ -64,7 +69,7 @@ export default function CompanyProfileCard({ profile }: CompanyProfileCardProps)
               <div>
                 <h4 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">Tier 1 Keywords</h4>
                 <div className="flex flex-wrap gap-1 sm:gap-2">
-                  {profile.tier1_keywords.map((keyword, index) => (
+                  {profile.tier1_keywords && Array.isArray(profile.tier1_keywords) && profile.tier1_keywords.map((keyword, index) => (
                     <span
                       key={index}
                       className="px-2 sm:px-3 py-1 bg-purple-600 text-white text-xs sm:text-sm font-medium hover:brightness-105 hover:scale-105 transition-transform duration-200"
@@ -72,12 +77,15 @@ export default function CompanyProfileCard({ profile }: CompanyProfileCardProps)
                       {keyword}
                     </span>
                   ))}
+                  {(!profile.tier1_keywords || !Array.isArray(profile.tier1_keywords) || profile.tier1_keywords.length === 0) && (
+                    <span className="text-gray-500 text-xs sm:text-sm italic">No tier 1 keywords available</span>
+                  )}
                 </div>
               </div>
               <div>
                 <h4 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">Tier 2 Keywords</h4>
                 <div className="flex flex-wrap gap-1 sm:gap-2">
-                  {profile.tier2_keywords.map((keyword, index) => (
+                  {profile.tier2_keywords && Array.isArray(profile.tier2_keywords) && profile.tier2_keywords.map((keyword, index) => (
                     <span
                       key={index}
                       className="px-2 sm:px-3 py-1 bg-blue-500 text-white text-xs sm:text-sm font-medium hover:brightness-105 hover:scale-105 transition-transform duration-200"
@@ -85,6 +93,9 @@ export default function CompanyProfileCard({ profile }: CompanyProfileCardProps)
                       {keyword}
                     </span>
                   ))}
+                  {(!profile.tier2_keywords || !Array.isArray(profile.tier2_keywords) || profile.tier2_keywords.length === 0) && (
+                    <span className="text-gray-500 text-xs sm:text-sm italic">No tier 2 keywords available</span>
+                  )}
                 </div>
               </div>
             </div>

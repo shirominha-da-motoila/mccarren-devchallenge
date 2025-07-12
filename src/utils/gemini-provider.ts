@@ -78,7 +78,7 @@ export class GeminiProvider implements AIProvider {
       company_description: profileData.company_description || 'No description available',
       tier1_keywords: Array.isArray(profileData.tier1_keywords) ? profileData.tier1_keywords : [],
       tier2_keywords: Array.isArray(profileData.tier2_keywords) ? profileData.tier2_keywords : [],
-      service_lines: serviceLines || Array.isArray(profileData.service_lines) ? profileData.service_lines : [],
+      service_lines: serviceLines || (Array.isArray(profileData.service_lines) ? profileData.service_lines : []),
     };
   }
 
