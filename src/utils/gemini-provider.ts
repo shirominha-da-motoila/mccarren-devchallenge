@@ -44,7 +44,7 @@ IMPORTANT: Return ONLY the JSON object, no markdown formatting, no code blocks, 
 
 export class GeminiProvider implements AIProvider {
   private genAI: GoogleGenerativeAI;
-  private model: any;
+  private model: ReturnType<GoogleGenerativeAI['getGenerativeModel']>;
   private promptTemplate: PromptTemplate;
 
   constructor(config: AIProviderConfig, promptTemplate?: PromptTemplate) {

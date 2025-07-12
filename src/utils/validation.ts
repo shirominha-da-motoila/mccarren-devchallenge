@@ -1,5 +1,5 @@
 export interface ValidationRule {
-  validate: (value: any) => boolean;
+  validate: (value: unknown) => boolean;
   message: string;
 }
 
@@ -16,11 +16,12 @@ export interface ValidationResult {
 export const validationRules = {
   url: [
     {
-      validate: (value: string) => value.trim().length > 0,
+      validate: (value: unknown) => typeof value === 'string' && value.trim().length > 0,
       message: 'Please enter a website URL'
     },
     {
-      validate: (value: string) => {
+      validate: (value: unknown) => {
+        if (typeof value !== 'string') return false;
         try {
           const validUrl = value.startsWith('http') ? value : `https://${value}`;
           new URL(validUrl);
@@ -34,20 +35,24 @@ export const validationRules = {
   ],
   email: [
     {
-      validate: (value: string) => value.trim().length === 0 || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+      validate: (value: unknown) => typeof value === 'string' && (value.trim().length === 0 || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)),
       message: 'Please enter a valid email address'
     }
   ],
   serviceLine: [
     {
-      validate: (value: { name: string; description?: string }) => value.name.trim().length > 0,
+      validate: (value: unknown) => {
+        if (typeof value !== 'object' || value === null) return false;
+        const obj = value as { name?: string };
+        return typeof obj.name === 'string' && obj.name.trim().length > 0;
+      },
       message: 'Service line name is required'
     }
   ]
 };
 
 // Generic validation function
-export function validateField(value: any, rules: ValidationRule[]): ValidationResult {
+export function validateField(value: unknown, rules: ValidationRule[]): ValidationResult {
   const errors: string[] = [];
   
   for (const rule of rules) {
@@ -63,7 +68,7 @@ export function validateField(value: any, rules: ValidationRule[]): ValidationRe
 }
 
 // Validate form data
-export function validateFormData(data: any, rules: ValidationRules): ValidationResult {
+export function validateFormData(data: Record<string, unknown>, rules: ValidationRules): ValidationResult {
   const errors: string[] = [];
   
   for (const [field, fieldRules] of Object.entries(rules)) {

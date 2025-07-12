@@ -13,9 +13,9 @@ export default function Home() {
 
   const handleUrlSubmit = async (data: {
     url: string;
-    emails: string[];
-    poc: string[];
-    serviceLines: ServiceLine[];
+    emails?: string[];
+    poc?: string[];
+    serviceLines?: ServiceLine[];
   }) => {
     setIsLoading(true);
     setError(null);
@@ -27,8 +27,8 @@ export default function Home() {
 
       const newProfile = {
         ...generatedProfile,
-        emails: data.emails,
-        poc: data.poc,
+        emails: data.emails || [],
+        poc: data.poc || [],
       }
       // Store the profile data in sessionStorage (temporary, cleared on page close)
       sessionStorage.setItem('currentProfile', JSON.stringify(newProfile));

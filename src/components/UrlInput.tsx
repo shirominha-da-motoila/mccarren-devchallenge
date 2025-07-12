@@ -31,7 +31,7 @@ export default function UrlInput({ onSubmit, isLoading }: UrlInputProps) {
     setErrors([]);
 
     // Validate form data
-    const validation = validateFormData(formData, {
+    const validation = validateFormData(formData as unknown as Record<string, unknown>, {
       url: validationRules.url
     });
 
@@ -59,7 +59,7 @@ export default function UrlInput({ onSubmit, isLoading }: UrlInputProps) {
     }
   };
 
-  const updateFormData = (field: keyof FormData, value: any) => {
+  const updateFormData = (field: keyof FormData, value: string | string[] | ServiceLine[]) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
