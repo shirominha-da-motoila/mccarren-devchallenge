@@ -69,10 +69,6 @@ cd mccarren-devchallenge
 ### 2. Install Dependencies
 ```bash
 npm install
-# or
-yarn install
-# or
-pnpm install
 ```
 
 ### 3. Environment Configuration
@@ -84,10 +80,6 @@ GOOGLE_AI_API_KEY=your_gemini_api_key_here
 ### 4. Run Development Server
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the application.
