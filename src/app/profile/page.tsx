@@ -23,6 +23,12 @@ export default function ProfilePage() {
     router.push('/');
   };
 
+  const handleProfileUpdate = (updatedProfile: CompanyProfile) => {
+    // Update the profile in sessionStorage
+    sessionStorage.setItem('currentProfile', JSON.stringify(updatedProfile));
+    setCurrentProfile(updatedProfile);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
       <div className="container mx-auto px-4 sm:px-8 py-4 sm:py-8">
@@ -33,7 +39,7 @@ export default function ProfilePage() {
               Generated Profile
             </h1>
             <p className="text-base sm:text-xl text-gray-700 mb-4">
-              View your AI-generated company profile
+              View and edit your AI-generated company profile
             </p>
           </div>
           <button
@@ -66,7 +72,10 @@ export default function ProfilePage() {
             </div>
           ) : (
             <div className="transform hover:shadow-lg transition-transform duration-200">
-              <CompanyProfileCard profile={currentProfile} />
+              <CompanyProfileCard 
+                profile={currentProfile} 
+                onProfileUpdate={handleProfileUpdate}
+              />
             </div>
           )}
         </div>
